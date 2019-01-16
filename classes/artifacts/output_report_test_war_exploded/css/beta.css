@@ -1,0 +1,588 @@
+/* CSS Document */
+body {
+	margin: 0;
+	padding: 0;
+	color: #5B6B73;
+	font-size: 12px;
+	overflow: auto;
+}
+
+.transformer {
+	position: absolute;
+	width: 40px;
+	height: 20px;
+	background-color: green;
+	cursor: pointer;
+	color: black;
+	z-index: 10;
+}
+
+.transformer:hover, .user:hover, .T:hover, .virtual:hover, .line:hover {
+	background: yellow;
+}
+
+.user {
+	position: absolute;
+    width: 20px;
+    height: 20px;
+    background: red;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	cursor: pointer;
+	color: black;
+	z-index: 10;
+}
+
+.T {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	background: blue;
+	cursor: pointer;
+	color: black;
+	z-index: 10;
+}
+
+.virtual {
+	position: absolute;
+    width: 20px;
+    height: 20px;
+    background: black;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	cursor: pointer;
+	color: black;
+	z-index: 10;
+}
+
+.line {
+	position: absolute;
+	cursor: pointer;
+	background: black;
+	height: 5px;
+	z-index: 5;
+}
+
+.currentSet {
+	position: relative;
+	background: white;
+	display: flex;
+}
+.userSelectNone { /*用户无法在该区域选择文本*/
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+#toolBar {
+	width: 100%;
+	height: 56px;
+	box-shadow: 1px 0 6px 0 black;
+	justify-content: space-between;   /*两端对齐，子元素之间的间隔都相等*/
+	align-items: center;   /*交叉轴的中点对齐*/
+	z-index: 100;
+	background: #F5F5F5;
+}
+#rightNav {
+	background: #F5F5F5;
+	width: 240px;
+	box-shadow: 0 -2px 5px 0 black;
+	z-index: 10;
+}
+#mainContain {
+	height: 100%;
+	color: #5B6B73;
+	height: 100%;
+}
+#container {
+	position: fixed;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+}
+#optimization {
+	width: 100%;
+	top: 58px;
+	position: absolute;
+	z-index: 10;
+	bottom: 0px;
+}
+#screens {
+	height: 100%;
+	margin-left: 244px;
+}
+#leftNav {
+	width: 244px;
+	height: 100%;
+	float: left;
+	position: relative;
+	flex-shrink: 0;
+	color: #5B6B73;
+	background: #F5F5F5;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 0 2px 5px 0 black;
+	z-index: 10;
+	overflow: hidden;
+	transition: all 0.2s ease-in-out;
+}
+.roomArea {
+	transform: scale(0.8);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	-webkit-transform-origin: center center;
+	transform-origin: center center;
+	background: rgba(0, 0, 0, 0);
+}
+#screenViewport {
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	position: relative;
+}
+
+.canvas {
+	background-color: rgb(255, 255, 255);
+	background-image: none;
+	position: relative;
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
+	background-repeat: repeat;
+	background-position: top left;
+	background-size: 100% auto;
+	overflow: visible;
+	background-color:rgba(0,0,0,0);
+	z-index: 2;
+	-webkit-transform-origin: top left;
+	-ms-transform-origin: top left;
+	transform-origin: top left;
+}
+
+#leftNav > div {
+	display: flex;
+	flex-direction: column;
+	padding: 15px 20px 15px 10px;
+	align-items: center;
+	position: relative;
+}
+
+#canvas {
+	background-image: none;
+	position: relative;
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
+	background-repeat: repeat;
+	background-position: top left;
+	background-size: 100% auto;
+	overflow: visible;
+	-webkit-transform-origin: top left;
+	-ms-transform-origin: top left;
+	transform-origin: top left;
+}
+
+.canvasArea {
+	transform: scale(1.0);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 5000px;
+	height: 5000px;
+	-webkit-transform-origin: left top;
+	transform-origin: left top;
+}
+
+.chooseColor {
+	position: absolute;
+	background:rgba(0,0,0,0.1);
+	z-index: 2048;
+	width: 100%;
+	height: 100%;
+/*	display: none;*/
+}
+
+.box {
+	box-shadow: 5px 5px 10px rgba(0,0,0,.7);
+	border: 1px solid #eeeeee;
+	text-align: center;
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	overflow: hidden;
+	color: #000;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	transform: perspective(1200px) translate3d(-50%,-50%,0) scale(1);
+	display: none;
+}
+
+.content {
+	position: relative;
+	border-radius: 3px 3px 0 0;
+	background: rgba(255,255,255,.95);
+}
+
+.choose {
+	background-color: #eeeeee;
+	position: relative;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	height: 40px !important;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	font-size: 12px;
+}
+
+.exit, .changeColor {
+	font-size: 14px;
+	line-height: 44px;
+	position: relative;
+	display: block;
+	overflow: hidden;
+	box-sizing: border-box;
+	width: 100%;
+	height: 44px;
+	padding: 0 5px;
+	cursor: pointer;
+	text-align: center;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: #1aad19;
+	/*background-color: #eeeeee;*/
+	background: rgba(255,255,255,.95);
+	-webkit-box-flex: 1;
+	border-right: 1px solid #d3d3d3;
+}
+
+.cancel {
+	font-size: 14px;
+	line-height: 44px;
+	position: relative;
+	display: block;
+	overflow: hidden;
+	box-sizing: border-box;
+	width: 100%;
+	height: 44px;
+	padding: 0 5px;
+	cursor: pointer;
+	text-align: center;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: #1aad19;
+	/*background-color: #eeeeee;*/
+	background: rgba(255,255,255,.95);
+	-webkit-box-flex: 1;
+	color: #2e3238;
+}
+.exitText {
+	font-family: inherit;
+	font-size: 16px;
+	margin: 5px 0 0;
+	color: #4a4a4a;
+	padding: 30px 30px 10px 30px;
+}
+
+.exit:hover, .changeColor:hover, .cancel:hover {
+	background-color: #eeeeee;
+}
+
+.alert {
+	color: red;
+	display: none;
+	padding: 10px;
+}
+
+.scoll {
+	position: absolute;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.artboard {
+	flex: 1;
+	position: relative;
+	pointer-events: none;
+}
+
+.restore {
+	position: absolute;
+	top: 94px;
+	left: 271px;
+	width: 50px;
+	height: 28px;
+	padding-left: 10px;
+	padding-right: 8px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 4;
+	cursor: pointer;
+	background: white;
+	border-radius: 2px;
+	box-shadow: 5px 5px 5px 0 rgba(39,54,78,0.3);
+	pointer-events: auto;
+}
+
+.scollBar {
+	position: absolute;
+	top: 0; 
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.xTrack {
+	pointer-events: auto;
+	position: absolute;
+	background: transparent;
+	left: 17px;
+	right: 11px;
+	bottom: 0;
+	height: 12px;
+}
+
+.yTrack {
+	pointer-events: auto;
+	position: absolute;
+	background: transparent;
+	top: 17px;
+	bottom: 11px;
+	right: 0;
+	width: 12px;
+}
+
+.xHandle {
+	width: 33.3333%;
+	left: 33.3333%;
+	position: absolute;
+	cursor: pointer;
+	bottom: 2px;
+	height: 10px;
+}
+
+.yHandle {
+	position: absolute;
+	cursor: pointer;
+	right: 2px;
+	width: 10px;
+	height: 33.3333%;
+	top: 33.3333%;
+}
+
+.xScrollBar {
+	position: absolute;
+	pointer-events: none;
+	bottom: 0;
+	width: 100%;
+	height: 10px;
+	background: #d2d2d8;
+	border-radius: 4px;
+	transition: background 0.2s ease-in-out;
+}
+
+.yScrollBar {
+	position: absolute;
+	pointer-events: none;
+	right: 0;
+	height: 100%;
+	width: 10px;
+	background: #DEDEE4;
+	border-radius: 4px;
+	transition: background 0.2s ease-in-out;
+}
+
+
+
+.selectPhoto {
+	position: absolute;
+	background:rgba(0,0,0,0.1);
+	z-index: 2048;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+
+
+
+.text {
+	font-family: inherit;
+	font-size: 16px;
+	margin: 5px 0 0;
+	color: #4a4a4a;
+	line-height: 1.75;
+}
+
+.inputPhoto {
+	margin:10px 0 10px 0;
+}
+
+
+.title {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	margin: 0 auto;
+}
+
+.toolBarLeft {
+	flex: 0 0 244px;
+	display: flex;
+	align-items: center;	
+}
+
+.toolBarCenter {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	margin-left: -7px;
+	
+	height: 100%;
+	line-height: 55px;
+}
+
+.toolBarRight {
+	margin: 0 30px;
+	padding-top: 5px;
+	padding-bottom: 8px;
+	align-self: stretch;
+	display: flex;
+	align-items: center;
+}
+
+
+
+.setMenu, .nodeMenu, .userMenu {
+	position: absolute;
+	display: none;
+	z-index: 1000;
+	width: 180px;
+	box-shadow: 2px 2px 8px 0 black;
+}
+
+.dropdownMenu {
+	background-color: #fff;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	min-width: 125px;
+	overflow: hidden;
+	margin: 0;
+	padding-left: 0;
+	list-style-type: none;
+
+}
+
+.setMenu li a, .nodeMenu li a, .userMenu li a {
+	display: block !important;
+	text-decoration: none;
+	color: #000;
+	font-size: 14px;
+	padding: 8px !important;
+	border-bottom: 1px solid #f1f1f1;
+	text-align: left;
+}
+
+.dropdownMenu span {
+	cursor: pointer;
+}
+
+.dropdownMenu li a:hover {
+	background-color:#f5f5f5;
+}
+
+#leftNav img{
+	margin: 0 auto;
+	cursor: pointer;
+}
+
+#leftNav form {
+	position: absolute;
+	opacity: 0;
+	z-index: 1000;
+}
+
+#leftNav form input{
+	width: 60px;
+	height: 60px;
+	cursor: pointer;
+}
+
+.show {
+	background: url(../image/show.png) no-repeat;
+}
+
+.hide {
+	background: url(../image/hide.png) no-repeat;
+	background-size: 32px 32px;
+}
+
+#leftNav i {
+	width: 32px;
+	height: 32px;
+	cursor: pointer;
+}
+
+.photo {
+	margin-top: 30px;
+}
+
+.nav {
+	display: inline-block;
+	width: 100px;
+	cursor: pointer;
+	text-align: center;
+}
+
+.choosed {
+	background: #00a5a5;
+	border-radius: 22px;
+	color: white;
+}
+
+#leftNav span {
+	cursor: pointer;
+}
+
+#myDiv {
+
+}
+
+
+
+.colorLine {
+	width: 170px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 15px;
+}
+
+.colorLine div {
+	width: 50px;
+	height: 20px;
+}
+
+.colorPick {
+	background: url(../image/colorPick.png) no-repeat;
+	background-size: 32px 32px;
+}
+
+
+
+.restore span {
+	display: block;
+	margin: 0 auto;
+}
+
+.restore:hover {
+	background-color: #00a5a5;
+	color: white;
+}

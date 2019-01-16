@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>output_report_test</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+
+  <filter>
+    <filter-name>encodeFilter</filter-name>
+    <filter-class>cn.powerrun.filter.EncodeFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>encodeFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <servlet>
+    <servlet-name>UploadServlet</servlet-name>
+    <servlet-class>cn.powerrun.controller.UploadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadServlet</servlet-name>
+    <url-pattern>/upload</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>GetExcelServlet</servlet-name>
+    <servlet-class>cn.powerrun.controller.NewGetExcelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetExcelServlet</servlet-name>
+    <url-pattern>/getExcel</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>GetImagePathServlet</servlet-name>
+    <servlet-class>cn.powerrun.controller.GetImagePathServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetImagePathServlet</servlet-name>
+    <url-pattern>/getImagePath</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>GetJSONServlet</servlet-name>
+    <servlet-class>cn.powerrun.controller.GetJSONServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetJSONServlet</servlet-name>
+    <url-pattern>/getJSON</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ContinueJSONServlet</servlet-name>
+    <servlet-class>cn.powerrun.controller.ContinueJSONServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ContinueJSONServlet</servlet-name>
+    <url-pattern>/continueJSON</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>auUploadFileServlet</servlet-name>
+    <servlet-class>cn.powerrun.jhController.AUploadFileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>auUploadFileServlet</servlet-name>
+    <url-pattern>/auUpload</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>testLinkServlet</servlet-name>
+    <servlet-class>cn.powerrun.jhController.TestLinkServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>testLinkServlet</servlet-name>
+    <url-pattern>/testLink</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>loginServlet</servlet-name>
+    <servlet-class>cn.powerrun.controller.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>loginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>getZipServlet</servlet-name>
+    <servlet-class>cn.powerrun.controller.GetZipServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getZipServlet</servlet-name>
+    <url-pattern>/getZip</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>generateImage</servlet-name>
+    <servlet-class>cn.powerrun.controller.GenerateImageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>generateImage</servlet-name>
+    <url-pattern>/generateImage</url-pattern>
+  </servlet-mapping>
+</web-app>

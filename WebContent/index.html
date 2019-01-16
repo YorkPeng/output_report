@@ -1,0 +1,323 @@
+<!doctype html>
+<html class="window" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalabel=0;" name="viewport" />  <!--移动端禁止页面缩放-->
+	<title>出报告系统beta</title>
+	<link rel="stylesheet" type="text/css" href="css/beta.css" />
+	<link rel="stylesheet" media="screen" type="text/css" href="css/colorpicker.css">
+	<script src="script/jquery-1.10.2.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="script/jquery.form.js"></script>
+	<script type="text/javascript" src="script/jszip.min.js"></script>
+	<script type="text/javascript" src="script/jspdf.debug.js"></script>
+	<script type="text/javascript" src="script/jquery.mousewheel.js"></script>
+</head>
+
+<body>
+  	<img src="image/logo.png" style="display: none" class="logo">
+	<div id="container" class="userSelectNone">
+    	<div id="mainContain">
+    	   	<div id="toolBar"  class="currentSet">
+    	   		<div class="toolBarLeft">
+   					<div class="title">
+						<span>请导入文件</span>
+					</div>
+<!--
+    				<div class="upload userSelectNone">
+    					<i class="upload-icon"></i>
+    					<span>导入JSON</span>
+    				</div>
+    				<div class="photo">
+    					<i class="upload-icon"></i>
+    					<span>导入底图</span>
+    				</div>
+-->
+    	   		</div>
+				<div class="toolBarCenter">
+					<div class="nav choosed">显示节点分布</div>
+					<div class="nav">显示表格</div>
+				</div>
+				<div class="toolBarRight">
+<!--
+					<div class="save">
+						<i class="upload-icon"></i>
+						<span>导出</span>
+					</div>
+-->
+				</div>
+    		</div>
+    		<div id="optimization" class="userSelectNone">
+       			<div id="leftNav">
+      				<div class="photo userSelectNone">
+    					<img src="image/upload.png" />
+    					<span>导入底图</span>
+    					<form id="submitForm_getImagePath">
+							<input type="file" name="file_getImagePath" id="upload_getImagePath" method="post" action="" enctype="multipart/form-data" multiple accept="image/*" />
+						</form>
+					</div>
+    				<div class="upload userSelectNone">
+    					<img src="image/RFQ.png" />
+    					<span>导入JSON</span>
+    					<form id="submitForm_getJSON">
+							<input type="file" name="file_getJSON" id="upload_getJSON" method="post" action="" enctype="multipart/form-data" multiple accept="application/json" />
+						</form>
+    				</div>
+    				<div class="userSelectNone">
+    					<img src="image/continue.png" style="width: 32px; height: 32px;" />
+    					<span>继续工程</span>
+    					<form id="submitForm_continueJSON">
+							<input type="file" name="file_getJSON" id="upload_continueJSON" method="post" action="" enctype="multipart/form-data" multiple accept="application/zip" />
+						</form>
+    				</div>
+    				<div class="userSelectNone">
+    					<i class="show switchBackGround"></i>
+    					<span>显示底图</span>
+    				</div>
+       				<div class="userSelectNone">
+    					<i class="colorPick"></i>
+    					<span>更改配色</span>
+    				</div>
+    				<div class="userSelectNone">
+    					<img src="image/pic.png" class="download"/>
+    					<span>生成报告</span>
+    				</div>
+    				<div class="userSelectNone">
+    					<img src="image/form.png" class="downloadExcel" />
+    					<span>生成Excel</span>
+						<form id="submitForm_getExcel">
+							<input type="button" name="file_getExcel" id="upload_getExcel"/>
+						</form>
+    				</div>
+    				<div class="userSelectNone">
+    					<img src="image/save.png" class="downloadZip" style="width: 32px; height: 32px;"/>
+    					<span>保存工程</span>
+						<form id="submitForm_downloadZip">
+							<input type="button" name="file_downloadZip" id="upload_downloadZip"/>
+						</form>
+    				</div>
+<!--
+       				<div class="userSelectNone">
+    					<img src="image/save.png" style="width: 32px; height: 32px;" class="downloadJSON"/>
+    					<span>保存工程</span>
+    				</div>
+-->
+    			</div>
+    			<div id="screens" class="userSelectNone">
+    				<div id="screenViewport" class="userSelectNone">
+    					<div>
+    						<div id="myDiv" style="font-size: 14px;"></div>
+    					</div>
+    					<div class="canvasArea" style="display: block">
+    						<canvas id="baseCanvas" width="5000" height="5000" style="display: none;"></canvas>
+    					</div>
+    				</div>
+    			</div>
+<!--
+    			<main class="scoll userSelectNone">
+    				<section class="artboard">
+    					<div class="restore">
+    						<span>  还原</span>
+    					</div>
+    					<div class="scollBar userSelectNone">
+    						<div class="xTrack">
+    							<div class="xHandle">
+    								<div class="xScrollBar"></div>
+    							</div>
+    						</div>
+    						<div class="yTrack">
+    							<div class="yHandle">
+    								<div class="yScrollBar"></div>
+    							</div>
+    						</div>
+    					</div>
+    				</section>
+    			</main>
+-->
+    		</div>
+    	</div>
+	</div>
+	<div class="restore">
+		<span>还原</span>
+	</div>
+    	<div class="box">
+  			<div class="content">
+  	 			<div class="exitText">
+  	 				<div class="colorLine">
+  	 					<span class="option">User结点:</span>
+  	  					<div class="UserColor" style="background-color: black"></div>
+  	 				</div>
+  	 				<div class="colorLine">
+  	 					<span class="option">T结点:</span>
+  	  					<div class="TColor" style="background-color: black"></div>
+  	 				</div>
+  	 				<div class="colorLine">
+  	 					<span class="option">虚拟结点:</span>
+  	  					<div class="VColor" style="background-color: black"></div>
+  	 				</div>
+  	 				<div class="colorLine">
+  	 					<span class="option">变压器结点:</span>
+  	  					<div class="TransformerColor" style="background-color: black"></div>
+  	 				</div>
+  	 				<div class="colorLine">
+  	 					<span class="option">线缆:</span>
+  	  					<div class="WireColor" style="background-color: black"></div>
+  	 				</div>
+  	 			 </div>
+  	      		<div class="choose">
+   	  				<span class="changeColor">确认</span>
+   	  				<span class="cancel">取消</span>
+    			</div>
+    		</div>
+  		</div> 	
+
+
+    <div class="selectPhoto">
+        <div class="box">
+        	<div class="content">
+        		<div class="text">
+        			<span>请选择一张照片</span>
+        			<br />
+        			<input class="inputPhoto" type="file" accept="image/*" />
+        		</div>
+        	</div>
+     		<div class="choose">
+   	  			<span class="confirm">确认</span>
+   	  			<span class="cancel">取消</span>
+    		</div>
+    	</div>
+    </div>
+	
+	<div class="setMenu">
+		<ul class="dropdownMenu">
+			<li>
+				<a>
+					<span>节点名：</span>
+					<span class="vnodeName"></span>
+				</a>
+			</li>
+			<li>
+				<a>
+					<span>节点类型：</span>
+					<span class="vnodeKind"></span>
+				</a>
+			</li>
+			<li>
+				<a>
+					<span>相型：</span>
+					<span class="phase"></span>
+				</a>
+			</li>
+			<li>
+				<a>
+					<span>x坐标：</span>
+					<span class="cartesianX"></span>
+				</a>
+			</li>
+			<li>
+				<a>
+					<span>y坐标：</span>
+					<span class="cartesianY"></span>
+				</a>
+			</li>
+			<li>
+				<a>
+					<span>z坐标：</span>
+					<span class="cartesianZ"></span>
+				</a>
+			</li>
+			<li>
+				<a>
+					<span>层次：</span>
+					<span class="level"></span>
+				</a>
+			</li>
+			<li>
+				<a>
+					<span>额定容量：</span>
+					<span class="capacity"></span>
+				</a>
+			</li>
+			<li>
+				<a>
+					<span>额定电压：</span>
+					<span class="outVoltage"></span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="nodeMenu">
+		<ul class="dropdownMenu">
+
+		</ul>
+	</div>
+
+	<div class="userMenu">
+		<ul class="dropdownMenu">
+			<li>
+				<a>
+					<span>节点名：</span>
+					<span class="vnodeName"></span>
+				</a>
+			</li>
+			<li>
+				<a>
+					<span>节点类型：</span>
+					<span class="vnodeKind"></span>
+				</a>
+			</li>
+			<li>
+				<a>
+					<span>相型：</span>
+					<span class="phase"></span>
+				</a>
+			</li>
+			<li>
+				<a>
+					<span>x坐标：</span>
+					<span class="cartesianX"></span>
+				</a>
+			</li>
+			<li>
+				<a>
+					<span>y坐标：</span>
+					<span class="cartesianY"></span>
+				</a>
+			</li>
+			<li>
+				<a>
+					<span>z坐标：</span>
+					<span class="cartesianZ"></span>
+				</a>
+			</li>
+			<li>
+				<a>
+					<span>层次：</span>
+					<span class="level"></span>
+				</a>
+			</li>
+			<li>
+				<a>
+					<span>额定容量：</span>
+					<span class="capacity"></span>
+				</a>
+			</li>
+			<li>
+				<a>
+					<span>额定电压：</span>
+					<span class="outVoltage"></span>
+				</a>
+			</li>
+		</ul>
+	</div>
+
+</body>
+<script type="text/javascript" src="script/colorpicker.js"></script>
+<script type="text/javascript" src="script/upload.js"></script>
+<script type="text/javascript" src="script/showMessage.js"></script>
+<script type="text/javascript" src="script/function.js"></script>
+<script type="text/javascript" src="script/menu.js"></script>
+<script type="text/javascript" src="script/html2canvas.js"></script>
+<script type="text/javascript" src="script/defaultSet.js"></script>
+
+</html>
